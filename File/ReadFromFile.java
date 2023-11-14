@@ -10,21 +10,22 @@ import java.util.ArrayList;
 
 public class ReadFromFile {
     public static void ReadFromFile(StudentManage list) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader("File/students.csv"))) {
-            reader.readLine();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                    String id = parts[0];
-                    String name = parts[1];
-                    int age = Integer.parseInt(parts[2]);
-                    String gender = parts[3];
-                    String address = parts[4];
-                    Double score = Double.parseDouble(parts[5]);
-                    Student student = new Student(id,name,age,gender,address,score);
-                    list.addStudent(student);
-                }
-            }
+        String line = null;
+        FileReader fileReader = new FileReader("File/students.csv");
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        while ((line = bufferedReader.readLine()) != null) {
+            String[] temp = line.split(",");
+            String id = temp[0];
+            String name = temp[1];
+            int age = Integer.parseInt(temp[2]);
+            String gender = temp[3];
+            String address = temp[4];
+            double score = Double.parseDouble(temp[5]);
+
+            Student data = new Student(id, name, age, gender, address, score);
+            list.addStudent(data);
         }
+        bufferedReader.close();
+    }
     }
 
